@@ -12,13 +12,15 @@
 <div class="mainContainer" ng-controller="MainController">
     <div class="loadingAnimation"></div>
 
-    <div class="content" ng-controller="MainController">
+    <div class="content" ng-controller="MainController"
+         ng-style="checkLengthOfTodoList() ? {'background':'#f2f2f2', 'border':'1px solid #ccc'} : {'background': 'transparent', 'border':'none'}">
 
         <div class='form-group'>
 
-            <input ng-model="todoBody" type="text" placeholder="Your todo..." title="Write your todo and hit enter." value="" class="form-control todoInput"
-                   ng-maxlength="21"
-                   submit-enter="addTodo()"></input>
+            <input ng-model="todoBody" type="text" placeholder="Your todo..." title="Write your todo and hit enter."
+                   class="form-control todoInput"
+                   ng-maxlength="25"
+                   submit-enter="addTodo()" autofocus></input>
 
         </div>
 
@@ -36,7 +38,9 @@
             </button>
             <button ng-click='cleanTodos()' class='btn btn-default cleanTodosButton'>Clean</button>
         </div>
-        <button ng-click='exportTodos()' title="Your todos will stay even if the page is reloaded." ng-show="checkLengthOfTodoList()" class='btn btn-default exportTodosButton'>Save todos</button>
+        <button ng-click='exportTodos()' title="Your todos will stay even if the page is reloaded."
+                ng-show="checkLengthOfTodoList()" class='btn btn-default exportTodosButton'>Save todos
+        </button>
 
     </div>
 </div>
@@ -44,9 +48,10 @@
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/angular.min.js"></script>
+<script src="js/angular-animate.min.js"></script>
 <script src="js/scripts.js"></script>
 <script>
-    var app = angular.module('app', []);
+    var app = angular.module('app', ['ngAnimate']);
 
     app.controller('MainController', ['$scope', '$http', '$log', function ($scope, $http, $log) {
 
@@ -58,7 +63,7 @@
 
         $scope.addTodo = function () {
             if ($scope.todoBody && $scope.todos.indexOf($scope.todoBody) == -1) {
-                $scope.todos.unshift($scope.todoBody);
+                $scope.todos.push($scope.todoBody);
                 $scope.todoBody = null;
             }
         };
@@ -80,7 +85,6 @@
         $scope.checkLengthOfTodoList = function () {
             return $scope.todos.length;
         }
-
 
     }]);
 
