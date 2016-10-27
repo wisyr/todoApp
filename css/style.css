@@ -169,6 +169,8 @@ input[type="text"]:focus {
 
 .mainContainer .content *:focus, *:active {
     outline: none;
+}
+.mainContainer .content .managementButtons button:focus, .mainContainer .content .managementButtons button:active, .mainContainer .content button:focus, .mainContainer .content button:active {
     background-color: #fff;
 }
 
