@@ -104,6 +104,14 @@ body {
 .exportTodosButton {
     width: 100%;
     height: 50px;
+    -webkit-transition: transform .5s;
+    -moz-transition: transform .5s;
+    -o-transition: transform .5s;
+    transition: transform .5s;
+}
+
+.exportTodosButton:hover {
+    transition: all .1s ease;
 }
 
 .removeTodoBtn {
@@ -161,6 +169,7 @@ input[type="text"]:focus {
 
 .mainContainer .content *:focus, *:active {
     outline: none;
+    background-color: #fff;
 }
 
 .mainContainer .content button {
