@@ -4,7 +4,7 @@
     <title>Todo App</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +20,7 @@
             <input ng-model="todoBody" type="text" placeholder="Your todo..." title="Write your todo and hit enter."
                    class="form-control todoInput"
                    ng-maxlength="25"
-                   submit-enter="addTodo()" autofocus></input>
+                   submit-enter="addTodo()" autofocus/>
 
         </div>
 
@@ -46,62 +46,13 @@
 </div>
 
 <script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
 <script src="js/angular-animate.min.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/controllers.js"></script>
 <script src="js/scripts.js"></script>
 <script>
-    var app = angular.module('app', ['ngAnimate']);
-
-    app.controller('MainController', ['$scope', '$http', '$log', function ($scope, $http, $log) {
-
-        if (localStorage.todosData !== undefined) {
-            $scope.todos = JSON.parse(localStorage.getItem("todosData"))
-        } else {
-            $scope.todos = [];
-        }
-
-        $scope.addTodo = function () {
-            if ($scope.todoBody && $scope.todos.indexOf($scope.todoBody) == -1) {
-                $scope.todos.push($scope.todoBody);
-                $scope.todoBody = null;
-            }
-        };
-
-        $scope.removeTodo = function (id) {
-            $scope.todos.splice(id, 1);
-        };
-
-        $scope.cleanTodos = function () {
-            $scope.todos = [];
-            localStorage.clear();
-        };
-
-        $scope.exportTodos = function () {
-            localStorage.clear();
-            localStorage.setItem("todosData", JSON.stringify($scope.todos));
-        };
-
-        $scope.checkLengthOfTodoList = function () {
-            return $scope.todos.length;
-        }
-
-    }]);
-
-    app.directive('submitEnter', function () {
-        return function (scope, element, attrs) {
-            element.bind("keydown keypress", function (event) {
-                if (event.which === 13) {
-                    scope.$apply(function () {
-                        scope.$eval(attrs.submitEnter);
-                    });
-
-                    event.preventDefault();
-                }
-            });
-        };
-    });
-
+    var app = angular.module('app', ['controllers', 'ngAnimate']);
 </script>
 </body>
 </html>
