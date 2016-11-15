@@ -23,11 +23,11 @@
 
         $scope.cleanTodos = function () {
             $scope.todos = [];
-            localStorage.clear();
+            delete localStorage.todosData;
         };
 
         $scope.exportTodos = function () {
-            localStorage.clear();
+            delete localStorage.todosData;
             localStorage.setItem("todosData", JSON.stringify($scope.todos));
         };
 
